@@ -59,21 +59,21 @@ class GameScene: SKScene {
     //MARK: Setup Functions
     func createPaddleNodes() -> [PaddleNode] {
         let paddle1Position = CGPointMake(verticalPaddleSize.width / 2, self.size.height / 2)
-        let paddle1 = self.paddleNode(UIColor.redColor(), position: paddle1Position, orientation: .vertical)
+        let paddle1 = self.paddleNode(SKColor.redColor(), position: paddle1Position, orientation: .vertical)
         
         let paddle2Position = CGPointMake(self.size.width - verticalPaddleSize.width / 2, self.size.height / 2)
-        let paddle2 = self.paddleNode(UIColor.greenColor(), position: paddle2Position, orientation: .vertical)
+        let paddle2 = self.paddleNode(SKColor.greenColor(), position: paddle2Position, orientation: .vertical)
         
         let paddle3Position = CGPointMake(self.size.width / 2, horizontalPaddleSize.height / 2)
-        let paddle3 = self.paddleNode(UIColor.yellowColor(), position: paddle3Position, orientation: .horizontal)
+        let paddle3 = self.paddleNode(SKColor.yellowColor(), position: paddle3Position, orientation: .horizontal)
         
         let paddle4Position = CGPointMake(self.size.width / 2, self.size.height - horizontalPaddleSize.height / 2)
-        let paddle4 = self.paddleNode(UIColor.blueColor(), position: paddle4Position, orientation: .horizontal)
+        let paddle4 = self.paddleNode(SKColor.blueColor(), position: paddle4Position, orientation: .horizontal)
         
         return [paddle1, paddle2, paddle3, paddle4]
     }
     
-    func paddleNode( color: UIColor, position: CGPoint, orientation: Orientation) -> PaddleNode {
+    func paddleNode( color: SKColor, position: CGPoint, orientation: Orientation) -> PaddleNode {
         let size: CGSize
         switch orientation {
         case .horizontal:
@@ -109,7 +109,7 @@ class GameScene: SKScene {
     }
     
     func wallNode( position: CGPoint, size: CGSize ) -> WallNode {
-        let wallNode = WallNode(color: UIColor.whiteColor(), size: size)
+        let wallNode = WallNode(color: SKColor.whiteColor(), size: size)
         wallNode.position = position
         wallNode.size = size
         wallNode.physicsBody = SKPhysicsBody(rectangleOfSize: wallNode.size)
