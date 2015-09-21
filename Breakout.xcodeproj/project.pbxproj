@@ -15,6 +15,9 @@
 		143B311D1BAA4A6800EA6B7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143B311B1BAA4A6800EA6B7A /* Main.storyboard */; };
 		143B311F1BAA4A6800EA6B7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 143B311E1BAA4A6800EA6B7A /* Assets.xcassets */; };
 		143B312A1BAA4A6800EA6B7A /* BreakoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B31291BAA4A6800EA6B7A /* BreakoutTests.swift */; };
+		149965551BAF963E008CBCA4 /* PaddleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149965541BAF963E008CBCA4 /* PaddleNode.swift */; };
+		149965571BAF983C008CBCA4 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149965561BAF983C008CBCA4 /* WallNode.swift */; };
+		149965591BAF9A4B008CBCA4 /* BallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149965581BAF9A4B008CBCA4 /* BallNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,9 @@
 		143B31251BAA4A6800EA6B7A /* BreakoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreakoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		143B31291BAA4A6800EA6B7A /* BreakoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakoutTests.swift; sourceTree = "<group>"; };
 		143B312B1BAA4A6800EA6B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		149965541BAF963E008CBCA4 /* PaddleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddleNode.swift; sourceTree = "<group>"; };
+		149965561BAF983C008CBCA4 /* WallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
+		149965581BAF9A4B008CBCA4 /* BallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +90,9 @@
 				143B31111BAA4A6800EA6B7A /* AppDelegate.swift */,
 				143B31131BAA4A6800EA6B7A /* GameScene.sks */,
 				143B31151BAA4A6800EA6B7A /* GameScene.swift */,
+				149965581BAF9A4B008CBCA4 /* BallNode.swift */,
+				149965561BAF983C008CBCA4 /* WallNode.swift */,
+				149965541BAF963E008CBCA4 /* PaddleNode.swift */,
 				143B31171BAA4A6800EA6B7A /* GameViewController.swift */,
 				143B31191BAA4A6800EA6B7A /* Game.xcassets */,
 				143B311B1BAA4A6800EA6B7A /* Main.storyboard */,
@@ -203,9 +212,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149965591BAF9A4B008CBCA4 /* BallNode.swift in Sources */,
+				149965571BAF983C008CBCA4 /* WallNode.swift in Sources */,
 				143B31161BAA4A6800EA6B7A /* GameScene.swift in Sources */,
 				143B31181BAA4A6800EA6B7A /* GameViewController.swift in Sources */,
 				143B31121BAA4A6800EA6B7A /* AppDelegate.swift in Sources */,
+				149965551BAF963E008CBCA4 /* PaddleNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +400,7 @@
 				143B31301BAA4A6800EA6B7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		143B31311BAA4A6800EA6B7A /* Build configuration list for PBXNativeTarget "BreakoutTests" */ = {
 			isa = XCConfigurationList;
@@ -396,6 +409,7 @@
 				143B31331BAA4A6800EA6B7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
