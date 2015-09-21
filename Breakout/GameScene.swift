@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import GameController
 
 typealias PaddleNode = SKSpriteNode
 typealias WallNode = SKSpriteNode
@@ -28,6 +29,7 @@ class GameScene: SKScene {
     
     var paddleNodes: [PaddleNode]?
     var wallNodes: [WallNode]?
+    var controllers: [GCController]?
     
     override func didMoveToView(view: SKView) {
         self.paddleNodes = self.createPaddleNodes()
@@ -42,6 +44,7 @@ class GameScene: SKScene {
             }
         }
         
+        self.setupControllers()
         self.startBall()
         self.physicsWorld.gravity = CGVectorMake(0, 0)
         
@@ -54,6 +57,11 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        print ( GCController.controllers().count )
+        if GCController.controllers().count > 0 {
+            let player1controller = GCController.controllers()[0]
+            print( player1controller.microGamepad?.dpad.xAxis )
+        }
     }
     
     //MARK: Setup Functions
@@ -118,6 +126,13 @@ class GameScene: SKScene {
         return wallNode
     }
     
+    func setupControllers() {
+        self.controllers = GCController.controllers()
+        GCController.startWirelessControllerDiscoveryWithCompletionHandler { () -> Void in
+            print("done discovering")
+        }
+    }
+    
     func startBall() {
         if let paddleNodes = self.paddleNodes {
             if  paddleNodes.count > 0 {
@@ -136,3 +151,4 @@ class GameScene: SKScene {
         }
     }
 }
+
