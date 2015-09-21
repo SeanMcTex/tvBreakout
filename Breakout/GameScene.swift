@@ -10,7 +10,7 @@ import SpriteKit
 
 typealias PaddleNode = SKSpriteNode
 typealias WallNode = SKSpriteNode
-typealias BallNode = SKSpriteNode
+typealias BallNode = SKShapeNode
 
 let verticalPaddleSize = CGSizeMake(10, 100)
 let horizontalPaddleSize = CGSizeMake(verticalPaddleSize.height, verticalPaddleSize.width)
@@ -123,8 +123,14 @@ class GameScene: SKScene {
             if  paddleNodes.count > 0 {
                 let paddleNode = paddleNodes[0]
                 let ballNode = BallNode()
-                ballNode.size = CGSizeMake(ballRadius * 2.0, ballRadius * 2.0)
-                ballNode.color = UIColor.purpleColor()
+                
+                let myPath = CGPathCreateMutable();
+                CGPathAddArc(myPath, nil, 0,0, ballRadius, 0, CGFloat( M_PI*2 ), true);
+                ballNode.path = myPath;
+                
+                ballNode.lineWidth = 0.0;
+                ballNode.fillColor = SKColor.whiteColor();
+                
                 ballNode.physicsBody = SKPhysicsBody(circleOfRadius: ballRadius)
                 ballNode.position = CGPointMake(paddleNode.position.x + 20, paddleNode.position.y)
                 ballNode.physicsBody?.velocity = CGVectorMake(500, 500)
