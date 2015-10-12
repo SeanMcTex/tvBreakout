@@ -9,7 +9,9 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    var players = 1
+    var players = 2
+    
+    let controllerManager = GameControllerManager()
     
     var paddleNodes: [PaddleNode] = []
     var wallNodes: [WallNode] = []
@@ -51,7 +53,15 @@ class GameScene: SKScene {
     
     
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+        for index in 0..<players {
+            paddleNodes[index].position.y += CGFloat( self.controllerManager.controllerXY(player: index).y )
+        }
+        
+        if ( self.controllerManager.buttonPressed( player: 0 ) ) {
+            let newBallNode = BallNodeFactory.startingBall( playfieldSize: self.size )
+            self.ballNodes.append( newBallNode )
+            self.addChild( newBallNode )
+        }
     }
 }
 

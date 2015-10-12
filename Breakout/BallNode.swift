@@ -11,7 +11,7 @@ import SpriteKit
 typealias BallNode = SKShapeNode
 
 let ballRadius = CGFloat( 10 )
-let newBallOffset = CGFloat( 20 )
+let newBallOffset = CGFloat( 100 )
 
 class BallNodeFactory {
     class func startingBall( playfieldSize playfieldSize: CGSize ) -> BallNode {
