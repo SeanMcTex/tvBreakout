@@ -54,7 +54,13 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         for index in 0..<players {
-            paddleNodes[index].position.y += CGFloat( self.controllerManager.controllerXY(player: index).y )
+            let paddleNode = paddleNodes[index]
+            switch paddleNode.orientation {
+            case .horizontal:
+                paddleNode.position.x += CGFloat( self.controllerManager.controllerXY(player: index).x )
+            case .vertical:
+                paddleNode.position.y += CGFloat( self.controllerManager.controllerXY(player: index).y )
+            }
         }
         
         if ( self.controllerManager.buttonPressed( player: 0 ) ) {
