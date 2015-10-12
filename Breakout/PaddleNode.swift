@@ -13,23 +13,18 @@ typealias PaddleNode = SKSpriteNode
 let verticalPaddleSize = CGSizeMake(10, 100)
 let horizontalPaddleSize = CGSizeMake(verticalPaddleSize.height, verticalPaddleSize.width)
 
-enum Orientation {
-    case horizontal
-    case vertical
-}
-
 class PaddleNodeFactory {
     class func paddleNodes(playfieldSize playfieldSize: CGSize ) -> [PaddleNode] {
-        let paddle1Position = CGPointMake(verticalPaddleSize.width / 2, playfieldSize.height / 2)
+        let paddle1Position = CGPointMake(verticalPaddleSize.width / 2 + horizontalOverscanMargin, playfieldSize.height / 2)
         let paddle1 = self.paddleNode(SKColor.redColor(), position: paddle1Position, orientation: .vertical)
         
-        let paddle2Position = CGPointMake(playfieldSize.width - verticalPaddleSize.width / 2, playfieldSize.height / 2)
+        let paddle2Position = CGPointMake(playfieldSize.width - verticalPaddleSize.width / 2 - horizontalOverscanMargin, playfieldSize.height / 2)
         let paddle2 = self.paddleNode(SKColor.greenColor(), position: paddle2Position, orientation: .vertical)
         
-        let paddle3Position = CGPointMake(playfieldSize.width / 2, horizontalPaddleSize.height / 2)
+        let paddle3Position = CGPointMake(playfieldSize.width / 2, horizontalPaddleSize.height / 2 + verticalOverscanMargin)
         let paddle3 = self.paddleNode(SKColor.yellowColor(), position: paddle3Position, orientation: .horizontal)
         
-        let paddle4Position = CGPointMake(playfieldSize.width / 2, playfieldSize.height - horizontalPaddleSize.height / 2)
+        let paddle4Position = CGPointMake(playfieldSize.width / 2, playfieldSize.height - horizontalPaddleSize.height / 2 - verticalOverscanMargin)
         let paddle4 = self.paddleNode(SKColor.blueColor(), position: paddle4Position, orientation: .horizontal)
         
         return [paddle1, paddle2, paddle3, paddle4]
