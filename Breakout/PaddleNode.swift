@@ -10,6 +10,8 @@ import SpriteKit
 
 typealias PaddleNode = SKSpriteNode
 
+let PaddleCategory: UInt32 = 0x1 << 0
+
 extension PaddleNode {
     var orientation: Orientation {
         if ( self.size.height == horizontalPaddleSize.height ) {
@@ -57,9 +59,13 @@ class PaddleNodeFactory {
         let paddleNode = PaddleNode(color: color, size: size)
         paddleNode.position = position
         
-        paddleNode.physicsBody = SKPhysicsBody(rectangleOfSize: paddleNode.size)
-        paddleNode.physicsBody?.dynamic = false
-        paddleNode.physicsBody?.restitution = 1.0
+        let body = SKPhysicsBody(rectangleOfSize: paddleNode.size)
+        body.dynamic = false
+        body.restitution = 1.0
+        body.categoryBitMask = PaddleCategory
+        body.contactTestBitMask = BallCategory
+        paddleNode.physicsBody = body
+
         paddleNode.constraints = constraints
         
         return paddleNode

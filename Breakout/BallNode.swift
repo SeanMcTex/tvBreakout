@@ -13,6 +13,8 @@ typealias BallNode = SKShapeNode
 let ballRadius = CGFloat( 10 )
 let newBallOffset = CGFloat( 100 )
 
+let BallCategory: UInt32 = 0x1 << 1
+
 class BallNodeFactory {
     class func startingBall( playfieldSize playfieldSize: CGSize ) -> BallNode {
         let ballNode = BallNode()
@@ -25,11 +27,15 @@ class BallNodeFactory {
         
         ballNode.position = CGPointMake( newBallOffset, playfieldSize.height / 2)
 
-        ballNode.physicsBody = SKPhysicsBody(circleOfRadius: ballRadius)
-        ballNode.physicsBody?.velocity = CGVectorMake(500, 500)
-        ballNode.physicsBody?.friction = 0.0
-        ballNode.physicsBody?.restitution = 1.0
-        ballNode.physicsBody?.linearDamping = 0.0
+        let body = SKPhysicsBody(circleOfRadius: ballRadius)
+        ballNode.physicsBody = body
+        body.velocity = CGVectorMake(500, 500)
+        body.friction = 0.0
+        body.restitution = 1.0
+        body.linearDamping = 0.0
+        body.categoryBitMask = BallCategory
+        body.contactTestBitMask = PaddleCategory
+
         
         return ballNode
     }

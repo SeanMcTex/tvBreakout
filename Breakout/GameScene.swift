@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     var players = 2
     
     let controllerManager = GameControllerManager()
@@ -28,6 +28,7 @@ class GameScene: SKScene {
     
     func setupPhysicsWorld() {
         self.physicsWorld.gravity = CGVectorMake(0, 0)
+        self.physicsWorld.contactDelegate = self
     }
     
     func addNodesToScene() {
@@ -43,8 +44,8 @@ class GameScene: SKScene {
         for ballNode in self.ballNodes {
             self.addChild( ballNode )
         }
-    
-
+        
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -68,6 +69,31 @@ class GameScene: SKScene {
             self.ballNodes.append( newBallNode )
             self.addChild( newBallNode )
         }
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        let ( node1, node2 ) = nodesFromContactOrderedByCategory( contact )
+        if let paddleNode = node1 as? PaddleNode, let ballNode = node2 as? BallNode {
+            ballNode.fillColor = paddleNode.color
+        }
+    }
+    
+    func nodesFromContactOrderedByCategory( contact: SKPhysicsContact ) -> ( SKNode, SKNode ) {
+        let firstBody: SKPhysicsBody;
+        let secondBody: SKPhysicsBody;
+        
+        if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+        {
+            firstBody = contact.bodyA;
+            secondBody = contact.bodyB;
+        }
+        else
+        {
+            firstBody = contact.bodyB;
+            secondBody = contact.bodyA;
+        }
+        
+        return (firstBody.node!, secondBody.node!)
     }
 }
 
