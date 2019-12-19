@@ -17,7 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wallNodes: [WallNode] = []
     var ballNodes: [BallNode] = []
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         self.paddleNodes = PaddleNodeFactory.paddleNodes( playfieldSize: self.size )
         self.wallNodes = WallNodeFactory.wallNodes( playfieldSize: self.size )
         self.ballNodes = [BallNodeFactory.startingBall( playfieldSize: self.size )]
@@ -27,7 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupPhysicsWorld() {
-        self.physicsWorld.gravity = CGVectorMake(0, 0)
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsWorld.contactDelegate = self
     }
     
@@ -48,12 +48,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /* Called when a touch begins */
-    }
     
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: CFTimeInterval) {
         for index in 0..<players {
             let paddleNode = paddleNodes[index]
             switch paddleNode.orientation {
@@ -72,7 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        let ( node1, node2 ) = nodesFromContactOrderedByCategory( contact )
+        let ( node1, node2 ) = nodesFromContactOrderedByCategory( contact: contact )
         if let paddleNode = node1 as? PaddleNode, let ballNode = node2 as? BallNode {
             ballNode.fillColor = paddleNode.color
         }

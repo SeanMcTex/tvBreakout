@@ -22,22 +22,22 @@ extension PaddleNode {
     }
 }
 
-let verticalPaddleSize = CGSizeMake(10, 150)
-let horizontalPaddleSize = CGSizeMake(verticalPaddleSize.height, verticalPaddleSize.width)
+let verticalPaddleSize = CGSize(width: 10, height: 150)
+let horizontalPaddleSize = CGSize(width: verticalPaddleSize.height, height: verticalPaddleSize.width)
 
 class PaddleNodeFactory {
-    class func paddleNodes(playfieldSize playfieldSize: CGSize ) -> [PaddleNode] {
-        let paddle1Position = CGPointMake(verticalPaddleSize.width / 2 + horizontalOverscanMargin, playfieldSize.height / 2)
-        let paddle1 = self.paddleNode(SKColor.redColor(), position: paddle1Position, orientation: .vertical, playfieldSize: playfieldSize)
+    class func paddleNodes(playfieldSize: CGSize ) -> [PaddleNode] {
+        let paddle1Position = CGPoint(x: verticalPaddleSize.width / 2 + horizontalOverscanMargin, y: playfieldSize.height / 2)
+        let paddle1 = self.paddleNode(color: SKColor.red, position: paddle1Position, orientation: .vertical, playfieldSize: playfieldSize)
         
-        let paddle2Position = CGPointMake(playfieldSize.width - verticalPaddleSize.width / 2 - horizontalOverscanMargin, playfieldSize.height / 2)
-        let paddle2 = self.paddleNode(SKColor.greenColor(), position: paddle2Position, orientation: .vertical, playfieldSize: playfieldSize)
+        let paddle2Position = CGPoint(x: playfieldSize.width - verticalPaddleSize.width / 2 - horizontalOverscanMargin, y: playfieldSize.height / 2)
+        let paddle2 = self.paddleNode(color: SKColor.green, position: paddle2Position, orientation: .vertical, playfieldSize: playfieldSize)
         
-        let paddle3Position = CGPointMake(playfieldSize.width / 2, horizontalPaddleSize.height / 2 + verticalOverscanMargin)
-        let paddle3 = self.paddleNode(SKColor.yellowColor(), position: paddle3Position, orientation: .horizontal, playfieldSize: playfieldSize)
+        let paddle3Position = CGPoint(x: playfieldSize.width / 2, y: horizontalPaddleSize.height / 2 + verticalOverscanMargin)
+        let paddle3 = self.paddleNode(color: SKColor.yellow, position: paddle3Position, orientation: .horizontal, playfieldSize: playfieldSize)
         
-        let paddle4Position = CGPointMake(playfieldSize.width / 2, playfieldSize.height - horizontalPaddleSize.height / 2 - verticalOverscanMargin)
-        let paddle4 = self.paddleNode(SKColor.blueColor(), position: paddle4Position, orientation: .horizontal, playfieldSize: playfieldSize)
+        let paddle4Position = CGPoint(x: playfieldSize.width / 2, y: playfieldSize.height - horizontalPaddleSize.height / 2 - verticalOverscanMargin)
+        let paddle4 = self.paddleNode(color: SKColor.blue, position: paddle4Position, orientation: .horizontal, playfieldSize: playfieldSize)
         
         return [paddle1, paddle2, paddle3, paddle4]
     }
@@ -59,8 +59,8 @@ class PaddleNodeFactory {
         let paddleNode = PaddleNode(color: color, size: size)
         paddleNode.position = position
         
-        let body = SKPhysicsBody(rectangleOfSize: paddleNode.size)
-        body.dynamic = false
+        let body = SKPhysicsBody(rectangleOf: paddleNode.size)
+        body.isDynamic = false
         body.restitution = 1.0
         body.categoryBitMask = PaddleCategory
         body.contactTestBitMask = BallCategory

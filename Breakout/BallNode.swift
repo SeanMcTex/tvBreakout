@@ -16,20 +16,20 @@ let newBallOffset = CGFloat( 100 )
 let BallCategory: UInt32 = 0x1 << 1
 
 class BallNodeFactory {
-    class func startingBall( playfieldSize playfieldSize: CGSize ) -> BallNode {
+    class func startingBall( playfieldSize: CGSize ) -> BallNode {
         let ballNode = BallNode()
         
-        let myPath = CGPathCreateMutable();
-        CGPathAddArc(myPath, nil, 0,0, ballRadius, 0, CGFloat( M_PI*2 ), true);
+        let myPath = CGMutablePath();
+        myPath.addArc(tangent1End: CGPoint(x: 0, y: 0), tangent2End: CGPoint(x: 0, y: CGFloat( .pi * 2.0 )), radius: ballRadius)
         ballNode.path = myPath;
         ballNode.lineWidth = 0.0;
-        ballNode.fillColor = SKColor.whiteColor();
+        ballNode.fillColor = SKColor.white;
         
-        ballNode.position = CGPointMake( newBallOffset, playfieldSize.height / 2)
+        ballNode.position = CGPoint( x: newBallOffset, y: playfieldSize.height / 2)
 
         let body = SKPhysicsBody(circleOfRadius: ballRadius)
         ballNode.physicsBody = body
-        body.velocity = CGVectorMake(500, 500)
+        body.velocity = CGVector(dx: 500, dy: 500)
         body.friction = 0.0
         body.restitution = 1.0
         body.linearDamping = 0.0

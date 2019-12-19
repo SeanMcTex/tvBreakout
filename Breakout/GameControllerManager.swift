@@ -16,7 +16,7 @@ class GameControllerManager {
         return GCController.controllers().count
     }
     
-    func controllerXY( player player: Int ) -> ( x: Float, y: Float ) {
+    func controllerXY( player: Int ) -> ( x: Float, y: Float ) {
         var x: Float = 0.0
         var y: Float = 0.0
         
@@ -36,14 +36,14 @@ class GameControllerManager {
         return (  x: x * trackingMultiplier, y: y * trackingMultiplier )
     }
     
-    func buttonPressed( player player: Int ) -> Bool {
+    func buttonPressed( player: Int ) -> Bool {
         if let controller = self.controllerFor( player: player ) {
-            return (controller.microGamepad?.buttonA.pressed)!
+            return (controller.microGamepad?.buttonA.isPressed)!
         }
         return false
     }
     
-    func controllerFor( player player: Int ) -> GCController? {
+    func controllerFor( player: Int ) -> GCController? {
         let controllers = GCController.controllers()
         if ( controllers.count > player ) {
             let controller = controllers[player]
@@ -53,18 +53,18 @@ class GameControllerManager {
         return nil
     }
     
-    func setPlayerIndex( controller controller: GCController, player: Int ) {
+    func setPlayerIndex( controller: GCController, player: Int ) {
         switch player {
         case 0:
-            controller.playerIndex = .Index1
+            controller.playerIndex = .index1
         case 1:
-            controller.playerIndex = .Index2
+            controller.playerIndex = .index2
         case 2:
-            controller.playerIndex = .Index3
+            controller.playerIndex = .index3
         case 3:
-            controller.playerIndex = .Index4
+            controller.playerIndex = .index4
         default:
-            controller.playerIndex = .IndexUnset
+            controller.playerIndex = .indexUnset
         }
     }
 }
